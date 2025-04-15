@@ -49,6 +49,7 @@ object WallService {
 
     fun clear() {
         posts = emptyArray()
+        comments = emptyArray()
         lastPostId = 1
     }
 }
@@ -71,5 +72,5 @@ fun main() {
 
     //try add comment to not existing post and get exception
     val postId = 5;
-    val commentPost = WallService.createComment(postId, comment) ?: throw PostNotFoundException("no post found $postId")
+    //val commentPost = WallService.createComment(postId, comment) ?: throw PostNotFoundException("no post found $postId")
 }
