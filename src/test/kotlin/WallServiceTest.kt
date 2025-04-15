@@ -79,4 +79,34 @@ class WallServiceTest {
         val commentPost =
             service.createComment(postId, comment) ?: throw PostNotFoundException("no post found $postId")
     }
+
+    @Test
+    fun ReportNotshouldThrow() {
+        val service = WallService
+        service.add(Post(5, 1, "Vladimir", 0, "First post", 0, 5, 5, true, 5, emptyArray()))
+
+        val comment = Comment(5, 1, 2, 0, "First Comment")
+        val postId = 1;
+        service.createComment(postId, comment) ?: throw PostNotFoundException("no post found $postId")
+
+        val report1 = ReportComment(1, 2, 2)
+        val result = WallService.createReportComment(report1.commentId, report1)
+
+        assertEquals(true, result)
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun RepostshouldThrow() {
+        val service = WallService
+        service.add(Post(5, 1, "Vladimir", 0, "First post", 0, 5, 5, true, 5, emptyArray()))
+
+        val comment = Comment(5, 1, 2, 0, "First Comment")
+        val postId = 1;
+        service.createComment(postId, comment) ?: throw PostNotFoundException("no post found $postId")
+
+        val report = ReportComment(10, 2, 2)
+        val result = WallService.createReportComment(report.commentId, report)
+    }
+
+
 }

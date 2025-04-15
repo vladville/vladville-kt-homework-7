@@ -1,3 +1,3 @@
 package ru.netology
 
-class Comment(var postId: Int, var id: Int,var authorId: Int, var date: Int, var text: String)
+class Comment(val postId: Int, val id: Int,val authorId: Int, val date: Int, val text: String)
