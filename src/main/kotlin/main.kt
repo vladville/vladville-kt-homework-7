@@ -23,7 +23,7 @@ object WallService {
 
     fun createReportComment(commentId: Int, report: ReportComment): Boolean {
 
-        if (report.reason !in 0 .. 8) {
+        if (report.reason !in 0..8) {
             throw PostNotFoundException("no reason found")
         }
 
@@ -39,15 +39,14 @@ object WallService {
         return false
     }
 
-    fun createComment(postId: Int, comment: Comment): Comment? {
+    fun createComment(postId: Int, comment: Comment): Comment {
         for (post in posts) {
             if (post.id == postId) {
                 comments += comment
                 return comment
             }
         }
-
-        return null
+        throw PostNotFoundException("no post found $postId")
     }
 
     fun add(post: Post): Post {
@@ -90,8 +89,8 @@ fun main() {
     println("Comment successful added: " + WallService.createComment(1, comment))
 
     //try add comment to not existing post and get exception
-    val postId = 5
-    //val commentPost = WallService.createComment(postId, comment) ?: throw PostNotFoundException("no post found $postId")
+    //val postId = 5
+    //val commentPost = WallService.createComment(postId, comment) //?: throw PostNotFoundException("no post found $postId")
 
     //try get exception
     //val report1 = ReportComment(5, 2, 2)
@@ -99,5 +98,5 @@ fun main() {
 
     //try add repost for comment
     val report = ReportComment(1, 2, 2)
-    println("Report successful added: " +WallService.createReportComment(report.commentId, report))
+    println("Report successful added: " + WallService.createReportComment(report.commentId, report))
 }

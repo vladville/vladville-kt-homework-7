@@ -64,7 +64,7 @@ class WallServiceTest {
         val comment = Comment(5, 1, 2, 0, "First Comment")
         val postId = 1;
         val result =
-            service.createComment(postId, comment) ?: throw PostNotFoundException("no post found $postId")
+            service.createComment(postId, comment)
 
         assertEquals(1, result.id)
     }
@@ -77,7 +77,7 @@ class WallServiceTest {
         val comment = Comment(5, 1, 2, 0, "First Comment")
         val postId = 10;
         val commentPost =
-            service.createComment(postId, comment) ?: throw PostNotFoundException("no post found $postId")
+            service.createComment(postId, comment) 
     }
 
     @Test
